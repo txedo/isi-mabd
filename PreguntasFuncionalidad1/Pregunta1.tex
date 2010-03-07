@@ -1,0 +1,24 @@
+\paragraph{Pregunta:} En el trabajo se comentan los lenguajes de definición de objetos y de consulta de objetos que define el estándar ODMG, pero no se hace referencia a ningún lenguaje para poder manipular objetos, es decir, insertarlos en la base de datos, modificarlos o eliminarlos. ¿Dicho estándar define un lenguaje de manipulación de datos específico? ¿Cómo se realizarían las manipulaciones sobre objetos en una base de datos orientada a objetos?
+
+\paragraph{Respuesta:} El estándar ODMG-93 sugiere que el lenguaje de manipulación de objetos (OML) sea la extensión de un lenguaje de programación, de forma que se pueden realizar entre otras las siguientes operaciones sobre la base de datos: creación, borrado, y modificación de un objeto. \cite{bdoo}.
+
+Por tanto, los objetos se manipulan dentro del lenguaje de programación orientado a objetos, utilizando el concepto de transacción y de clases persistentes. De este modo, como indica el ODMG API (\cite{odmgapi}), para realizar las operaciones de inserción, modificación o eliminación de un objeto dentro del lenguaje de programación, se procedería de la siguiente forma:
+\begin{enumerate}
+	\item Crear una transacción.
+	\item Obtener la base de datos en uso.
+	\item Ejecutar la operación de inserción, modificación o eliminación.
+\end{enumerate}
+
+Un ejemplo de inserción sería el siguiente:
+
+\begin{verbatim}
+ public static void storeNewProduct(Product product)
+	    Transaction tx = odmg.newTransaction();
+	    tx.begin();
+	    // get current used Database instance
+	    Database db = odmg.getDatabase(null);
+	    // make persistent new object
+	    db.makePersistent(product);
+	    tx.commit();
+\end{verbatim}
+
