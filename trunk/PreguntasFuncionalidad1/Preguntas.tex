@@ -1,0 +1,61 @@
+% Tipo de documento. En este caso es un artículo, para folios A4, tamaño de la fuente 11pt y con página separada para el título
+\documentclass[a4paper,12pt,titlepage]{article}
+
+% Carga de paquetes necesarios. OrdenesArticle es un paquete personalizado
+\usepackage[spanish]{babel} 
+\RequirePackage[T1]{fontenc}
+\RequirePackage[ansinew]{inputenx} 
+\usepackage[spanish,cap,cont,title,fancy]{OrdenesArticle}
+\usepackage{array}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{pifont}
+\usepackage{listings}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{colortbl}
+\usepackage{makeidx}
+\hypersetup{bookmarksopen,bookmarksopenlevel=3,linktocpage,colorlinks,urlcolor=blue,citecolor=blue,
+						linkcolor=blue,filecolor=blue,pdfnewwindow,
+						pdftitle={Listado de preguntas Funcionalidad 1}, 
+						pdfauthor={Juan Andrada Romero, Juan José Antequera Flores},
+						pdfsubject={Modelos Avanzados de Base de Datos}}
+
+
+% Macro para definir una lista personalizada 
+\newenvironment{milista}%
+{\begin{list}{\textbullet}%
+{\settowidth{\labelwidth}{\textbullet} \setlength{\leftmargin}{\dimexpr\labelsep+\labelwidth+5pt}
+\setlength{\itemsep}{\dimexpr 0.5ex plus 0.25ex minus 0.25ex}
+\setlength{\parsep}{\itemsep}
+\setlength{\partopsep}{\itemsep}
+\addtolength{\topsep}{-7.5pt}
+}}%
+{\end{list}}
+
+
+\begin{document}
+
+% En las páginas de portada e índices, no hay encabezado ni pie de página
+\pagestyle{empty} 
+
+% Se incluye la portada
+\input{Portada.tex}
+\clearpage
+
+\parskip = 10pt
+% Comienza el contenido del documento. Se utilizan números arábigos y el encabezado y pie de página personalizado
+\pagenumbering{arabic}
+\pagestyle{fancy}
+
+\input{Pregunta1}
+
+
+\newpage
+% Bibliograf\'ia 
+\bibliographystyle{plain}
+\pagestyle{plain} 
+\bibliography{Bibliografia}
+
+
+\end{document}
+
