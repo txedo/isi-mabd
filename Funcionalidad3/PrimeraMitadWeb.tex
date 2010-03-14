@@ -8,10 +8,6 @@ La World Wide Web (Web, de manera abreviada) aparece a finales de los años 90, p
 La Web está compuesta por una red muy numerosa de computadores, donde unos actúan como \textit{servidores}, para proporcionar la información, y otros como \textit{clientes} o \textit{navegadores Web}, que solicitan a los servidores la información, utilizando un protocolo de comunicación. El protocolo que se utiliza para transferir las páginas Web a través de Internet es \textbf{HTTP}, que es un protocolo genérico, orientado a objetos y sin memoria del estado, es decir, que el servidor no almacena ninguna información entre una solicitud y la siguiente. Sin embargo, esta carencia de memoria de HTTP hace que sea difícil soportar el concepto de \textit{sesión}, necesario para poder realizar las operaciones necesarias sobre el SGBD (Sistema Gestor de Bases de Datos). \\
 \indent Por otra parte, para componer y poder publicar un documento en la Web, se utiliza el lenguaje HTML, el cuál define la información que se transmite entre nodos de la red. Dicho lenguaje ha ido evolucionando a lo largo de su historia, utilizándose actualmente la versión HTML 4.01, que tiene soporte para hojas de estilo, scripts y objetos incrustados.
 
-En la Figura \ref{fig:web} se puede ver un esquema simplificado de la Web. 
-
-\imagen{./imagenes/Web}{0.7}{Componentes básicos de la Web}{fig:web}
-
 Con todo ello, se puede resumir el funcionamiento de un navegador Web en los siguientes puntos: 
 \begin{enumerate}
 	\item El usuario, haciendo uso del navegador web (sistema cliente), solicita visualizar una página web.
@@ -68,38 +64,31 @@ No obstante, existe un tipo especial de SGBD que se utiliza para datos semi-estr
 
 Por tanto, para tratar con este tipo de datos, que abunda en la Web, se utilizan los siguiente modelos y SGBD específicos:
 
-\subsubsection{XML}
-\subsubsection{Lore}
-Lore (\cite{lore}) 
-\subsubsection{}
+\subsubsection{Modelo de Intercambio de Objetos (OEM - Object Exchange Model}
 
+OEM (\cite{oem}) es un modelo de objetos anidados que fue diseñado para su uso en diferentes proyectos del \textit{Grupo de Bases de Datos de la Universidad de Standford}, para soportar la integración de datos de diferentes orígenes de datos. Los datos OEM son carentes de esquema y pueden considerarse como un grafo dirigido etiquetado (ver Figura \ref{fig:oem}), donde los nodos son objetos. A su vez, cada objeto está compuesto por un identificador, una etiqueta descriptiva, un tipo de datos y un valor. En cuanto a los tipos de datos, éstos pueden ser simples (\textit{string}, \textit{int}, etc.) y no tienen conexiones con otros nodos del grafo, o puden ser otros objetos, que se conectan con otros nodos del grafo.
 
+\imagen{./imagenes/OEM}{0.5}{Ejemplo de datos en el modelo OEM}{fig:oem}
 
+\subsubsection{XML - eXtensible Markup Language}
 
+XML (\cite{xml}) es un metalenguaje definido por el World Wide Web Consortium (W3C) que permite la definición de etiquetas personalizadas para proporcionar funcionalidad no disponible en HTML. En XML existen dos tipos de modelos: el modelo centrado en los datos y el modelo centrado en los documentos.
 
+Si se utiliza como modelo de documentos, XML se utiliza como formato de almacenamiento e intercambio para datos que estructurados. En este caso, los datos podrían almacenarse en un SGBD relacional, transformando el documento XML en el esquema relacional. Esto puede hacer con una extensión del SQL, llamada SQL/XML.
 
-\subsection{Ventajas y desventajas de la integración Web-SGBD}
-
-En lo que se refiere a las ventajas y desventajas de utilizar un SGBD en una aplicación Web, podemos señalar las siguientes:
-
+En el caso de que XML se use para codificar datos semi-estructurados, se usa una base de datos XML nativa (\textit{NXD, Native XML Database}), las cuáles definen un modelo de datos para un documento XML, almacenando y extrayendo documentos de acuerdo con dicho modelo. Ejemplos de estos SGBD son Lore, Infonyte DB o Tamino XML Server. Además, se pueden distinguir dos tipos de NXD, según como almacenen la información: 
 \begin{milista}
-
-	\item \textbf{Ventajas}
-		\begin{itemize}
-			\item Permite proporcionar a una página HTML de toda la funcionalidad y de todos los mecanismos de protección que proporciona el SGBD.
-			\item Independencia entre el SGBD y la aplicación Web que lo utilice.
-			\item Poder acceder a la base de datos desde cualquier parte del mundo, utilizando la Web.
-			\item Implantación escalable, ya que se pueden distribuir diferentes bases de datos.
-			\item Acceso distribuido a los datos, lo que puede aumentar la velocidad de acceso a éstos cuando se solicita una página Web al servidor.
-		\end{itemize}
-	
-	\item \textbf{Desventajas}
-		\begin{itemize}
-			\item Fiabilidad, ya Internet es un medio de comunicación poco fiable.
-			\item Seguridad en el acceso a los datos.
-			\item Coste que supone mantener los servicios Web, los servidores y las bases de datos.
-			\item Carencia de memoria del protocolo HTTP, lo que obliga a mantener información adicional en el servidor para manejar el acceso a la base de datos. 
-			\item Dificultad para manejar grandes volúmenes de datos con la base de datos, debido a que el ancho de banda de la red es limitado, lo que puede aumentar la latencia de la aplicación Web.
-		\end{itemize}
-	
+	\item \textbf{Basados en texto:} almacenan el código XML como texto, como un archivo de un sistema de archivos o como un dato de tipo CLOB en un SGBD relacional.
+	\item \textbf{Basados en modelo:} almacenan el código XML en alguna representación interna en forma de árbol.
 \end{milista}
+
+Por otra parte, estas bases de datos XML utilizan un lenguaje de consulta de datos llamado \textit{XQuery}. Un ejemplo de consulta para obtener una lista de identificadores de empleados de un documento XML, es el siguiente: 
+\begin{verbatim}
+FOR $S IN doc(“staff_list.xml”)
+	WHERE $S/SALARY >15000 AND $S/@branchNo=”B005”
+RETURN $S/STAFFNO
+\end{verbatim}
+
+
+
+

@@ -1,1 +1,74 @@
 \subsection{Técnicas para la integración Web-SGBD}
+
+En las siguientes subsecciones se comentarán algunas de las técnicas y tecnologías más utilizadas para la integración de bases de datos en entornos web.
+
+\subsubsection{CGI - Common Gateway Interface}
+
+La interfaz de pasarela común es un protocolo estándar que define cómo los \textit{scripts CGI} se comunican con el servidor Web. Un script CGI está diseñado para aceptar y devolvder datos que sean conformes con la especificación de CGI, pudiendo así reutilizar los scripts independientemente del servidor Web que se esté utilizando. 
+
+A continuación se describe la forma de actuación de un CGI de forma esquemática:
+
+\begin{enumerate}
+	\item En primera instancia, el servidor recibe una petición (el cliente ha activado un URL que contiene el CGI), y comprueba si se trata de una invocación de un CGI.
+	\item El servidor comprueba los archivos de configuración y de acceso para asegurarse de que el solicitante tiene acceso al script CGI. 
+	\item El servidor prepara el entorno para ejecutar el script.
+	\item El servidor ejecuta el script, leyendo las variables de entorno y su entrada estándar.
+	\item El script realiza su función. Como consecuencia de su actividad se va generando un objeto MIME que la aplicación escribe en su salida estándar.
+	\item Cuando el script finaliza, el servidor envía la información producida, junto con información propia, al cliente, que se encontraba en estado de espera.
+\end{enumerate}
+
+Actualmente, ésta es la solución que más se está utilizando para la creación de interfaces Web-SGBD. Entre las ventajas de la programación CGI, se pueden destacar su sencillez, ya que es muy fácil de entender; es un lenguaje de programación independiente, soportando lenguajes como C, C++, Java, Perl, Python, etc. y es un estándar para usarse en todos los servidores Web.
+
+Como desventaja se puede destacar la baja eficiencia que tiene el uso de CGI, debido a que el servidor Web tiene que cargar el script CGI y establecer la conexión con la base de datos cada vez que se recibe una petición.
+
+\subsubsection{Lenguajes de script}
+
+Un \textit{script} es un código escrito en un lenguaje de porgramación que se incrusta en el código HTML de una página Web y que se puede ejecutar en el lado del servidor o del cliente, añadiendo nuevas funcionalidades a la página Web. De esta forma, se pueden automatizar funciones para acceder a los datos de la base de datos, creando nuevo código HTML y mostrando así lás páginas Web personalizadas con los datos que pide el cliente. 
+
+Algunos de los lenguajes de script más utilizados actualmente se comentan a continuación.
+
+\paragraph{JavaScript}
+
+JavaScript es un lenguaje de scripts basado en Java, orientado a objetos, interpertado, débilmente tipado e incrustado en código HTML. Permite incluir en las páginas HTML funciones que respondan a los sucesos del usuario, como clics de ratón, eventos de teclado, etc., o acceso a la base de datos si se ejecuta en el lado del servidor. 
+
+\paragraph{VBScript}
+
+VBScript es otro lenguaje de scripts procedimental (basado en subrutinas), muy similar a JScript en cuanto a funcionalidad se refiere, pero con la sintaxis de Visual Basic. 
+
+\paragraph{Perl y PHP}
+
+Perl (Practical Extraction and Report Language) es un lenguaje de programación de alto nivel interpretado que combina características de C y de diferentes órdenes de sistemas UNIX. Hoy en día es uno de los lenguajes de script más utilizados para su ejecución en el lado del servidor.
+
+Por otra parte, PHP (Hypertext Preprocessor) es otro lenguaje de script de código abierto que se incrusta en HTML y que es soportado por multitud de servidores Web. Uno de los mayores usos que tiene es el acceso a bases de datos en el lado del servidor, utilizando como SGBD \textit{MySQL} y como servidor, \textit{HTTP Apache}. 
+
+\subsubsection{Java}
+\paragraph{JDBC}
+\paragraph{ODBC}
+\paragraph{JSP}
+\subsubsection{ASP.NET}
+
+\subsection{Ventajas y desventajas de la integración Web-SGBD}
+
+En lo que se refiere a las ventajas y desventajas de utilizar un SGBD en una aplicación Web, podemos señalar las siguientes:
+
+\begin{milista}
+
+	\item \textbf{Ventajas}
+		\begin{itemize}
+			\item Permite proporcionar a una página HTML de toda la funcionalidad y de todos los mecanismos de protección que proporciona el SGBD.
+			\item Independencia entre el SGBD y la aplicación Web que lo utilice.
+			\item Poder acceder a la base de datos desde cualquier parte del mundo, utilizando la Web.
+			\item Implantación escalable, ya que se pueden distribuir diferentes bases de datos.
+			\item Acceso distribuido a los datos, lo que puede aumentar la velocidad de acceso a éstos cuando se solicita una página Web al servidor.
+		\end{itemize}
+	
+	\item \textbf{Desventajas}
+		\begin{itemize}
+			\item Fiabilidad, ya Internet es un medio de comunicación poco fiable.
+			\item Seguridad en el acceso a los datos.
+			\item Coste que supone mantener los servicios Web, los servidores y las bases de datos.
+			\item Carencia de memoria del protocolo HTTP, lo que obliga a mantener información adicional en el servidor para manejar el acceso a la base de datos. 
+			\item Dificultad para manejar grandes volúmenes de datos con la base de datos, debido a que el ancho de banda de la red es limitado, lo que puede aumentar la latencia de la aplicación Web.
+		\end{itemize}
+	
+\end{milista}
