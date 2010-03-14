@@ -1,0 +1,105 @@
+\section{Bases de datos Web}
+
+\subsection{Introducción}
+
+La World Wide Web (Web, de manera abreviada) aparece a finales de los años 90, proporcionando una técnica simple para explorar grandes volúmenes de páginas de información que residen en Internet. La información que puede contener dichas páginas puede ser texto, gráficos, imágenes, sonidos y video, además de los hipervínculos que una página web posee hacia otra página. \\
+\indent Por todo ello, la Web puede definirse como \textit{un sistema basado en tecnología hipermedia que proporciona un método de explorar información en Internet de forma no secuencial, utilizando hipervínculos}. \cite{libro-dedales}
+
+La Web está compuesta por una red muy numerosa de computadores, donde unos actúan como \textit{servidores}, para proporcionar la información, y otros como \textit{clientes} o \textit{navegadores Web}, que solicitan a los servidores la información, utilizando un protocolo de comunicación. El protocolo que se utiliza para transferir las páginas Web a través de Internet es \textbf{HTTP}, que es un protocolo genérico, orientado a objetos y sin memoria del estado, es decir, que el servidor no almacena ninguna información entre una solicitud y la siguiente. Sin embargo, esta carencia de memoria de HTTP hace que sea difícil soportar el concepto de \textit{sesión}, necesario para poder realizar las operaciones necesarias sobre el SGBD (Sistema Gestor de Bases de Datos). \\
+\indent Por otra parte, para componer y poder publicar un documento en la Web, se utiliza el lenguaje HTML, el cuál define la información que se transmite entre nodos de la red. Dicho lenguaje ha ido evolucionando a lo largo de su historia, utilizándose actualmente la versión HTML 4.01, que tiene soporte para hojas de estilo, scripts y objetos incrustados.
+
+En la Figura \ref{fig:web} se puede ver un esquema simplificado de la Web. 
+
+\imagen{./imagenes/Web}{0.7}{Componentes básicos de la Web}{fig:web}
+
+Con todo ello, se puede resumir el funcionamiento de un navegador Web en los siguientes puntos: 
+\begin{enumerate}
+	\item El usuario, haciendo uso del navegador web (sistema cliente), solicita visualizar una página web.
+	\item El navegador solicita esta página (que está codificada en lenguaje HTML, el lenguaje que puede interpretar) al servidor web (sistema servidor), utilizando el protocolo HTTP.
+	\item El servidor web envía la información que le han pedido, en HTML, al navegador del usuario.
+	\item El navegador muestra la página web en la pantalla del usuario.
+\end{enumerate}
+
+Como se puede comprobar, el intercambio de información entre el cliente y el servidor es posible gracias a que, entre otras cosas, las páginas Web utilizan el lenguaje HTML. Sin emabargo, tradicionalmente, se han utilizado documentos HTML estáticos, para los cuales se creaban las posibles respuestas ante las peticiones del cliente. Pero, en la actualidad, surge la posibilidad de utilizar aplicaciones que permitan acceder a información de forma dinámica, con contenidos y formatos muy diversos. Esto ha hecho que sea necesaria la integración de los SGBDs en los servidores Web, para poder recuperar la información de la base de datos según la petición que envie el cliente.
+
+Así, en la sección \ref{estatica-dinamica} se van a comentar las diferencias existentes entre una página Web estática y una página Web dinámica, además de comentar brevemente los servicios Web. En la sección \ref{requisitos} se van a comentar las características o requisitos que debe tener una base de datos para su uso en la Web, así como sus ventajas y desventajas. Para terminar ......... (TXEDO).
+
+\subsection{Páginas Web estáticas y dinámicas} \label{estatica-dinamica}
+
+Una página web estática se puede definir como un documento HTML que contiene la información sobre la página y donde dicha información no cambia, a no ser que se cambie el propio documento. Por esta razón, no es necesario acceder a una base de datos para recuperar la información, ya que se ésta se encuentra contenida dentro del propio documento que se va a enviar al cliente. 
+
+Sin embargo, la información de una página Web dinámica se genera cada vez que se accede a dicha página, realizando, por ejemplo, consultas a una base de datos. De este modo, las páginas Web dinámicas tienen características que no tienen las páginas Web estáticas:
+
+\begin{milista}
+	\item Los datos que se muestran en la página Web son personalizados para cada usuario.
+	\item Se puede responder a los datos de entrada que el usuario introduce a través del navegador. 
+\end{milista}
+
+En la actualidad, prácticamente todas las páginas que existen son dinámicas, pero existe otro paradigma que está cobrando una gran imporantica a la hora de construir y utilizar aplicaciones Web: \textbf{Servicios Web}. Un servicio Web puede definirse como \textit{un conjunto de aplicaciones o de tecnologías con capacidad para interoperar en la Web, intercambiando datos entre sí con el objetivo de ofrecer unos servicios}.  \cite{servicios-web} En la Figura \ref{fig:servicio} se puede observar un ejemplo de servicios Web.
+
+\imagen{./imagenes/servicioWeb}{0.6}{Interacción entre Servicios Web}{fig:servicio}
+
+Las tecnologías estándares que utiliza un servicio Web para esta interoperabilidad son: 
+
+\begin{milista}
+	\item Lenguaje XML (eXtensible Markup Language).
+	\item Protocolo SOAP (Simple Object Access Protocol), para la comunicación en Internet.
+	\item Lenguaje WSDL (Web Services Description Language), para describir el servicio Web.
+	\item Protocolo UDDI (Universal Discovery, Description and Integration), que se utiliza para registrar el servicio y que pueda ser utilizado.
+\end{milista}
+
+En el caso de los servicios Web, como al fin y al cabo son aplicaciones Web, es también necesario el uso de base de datos, para poder acceder a la información que necesita la aplicación pasa su funcionamiento. 
+
+\subsection{Integración Web-SGBD}
+
+En la Web, no se puede hablar de un tipo de SGBD específico, como puede ocurrir en otros tipos de bases de datos, como pueden ser las orientadas a objetos. Si bien es cierto que existen fabricantes que tratan de proporcionar soluciones propietarias de conectividad, la mayoría de empresas prefieren utilizar un SGBD más general, para no atarse a una tecnología concreta. Así, las bases de datos Web no son más que SGBD utilizados y orientados a la Web, de tal modo que se utiliza el SGBD que más se adapte a la naturaleza de la información que debe manejar la aplicación Web correspondiente.  
+
+Los requisitos que debe cumplir un SGBD para poder integrarse en una aplicación Web, son los siguientes: 
+
+\begin{milista}
+	\item Incorporar algún tipo de \textit{middleware} (capa de software que se sitúa sobre el SGBD) para añadir conectividad a la base de datos a través de Internet. Dicha conectividad debe ser independiente de los datos y del fabricante.
+	\item Soporte para transacciones que abarquen múltiples solicitudes HTTP (es decir, acceso concurrente a los datos).
+  \item Soporte para mecanismos de autenticación basados en la sesión y en la aplicación.
+	\item Arquitectura abierta que permita la interoperabilidad con diversos sistemas y tecnologías (servicios Web, RMI, CORBA, XML, etc.)
+\end{milista}
+
+No obstante, existe un tipo especial de SGBD que se utiliza para datos semi-estructurados, que son datos que pueden ser irregulares o incompletos, cuya estructura puede cambiar de forma rápida o impredecible y son débilmente tipados. \cite{semi-estructurado}. \\
+\indent Por este motivo, un SGBD como puede ser un SGBD relacional u orientado a objetos pueden tener problemas a la hora de manejar datos de este tipo, ya que dichos SGBD almacenan los datos siguiendo un esquema fijo, como puede ser una tabla, en el modelo relacional. 
+
+Por tanto, para tratar con este tipo de datos, que abunda en la Web, se utilizan los siguiente modelos y SGBD específicos:
+
+\subsubsection{XML}
+\subsubsection{Lore}
+Lore (\cite{lore}) 
+\subsubsection{}
+
+
+
+
+
+
+\subsection{Ventajas y desventajas de la integración Web-SGBD}
+
+En lo que se refiere a las ventajas y desventajas de utilizar un SGBD en una aplicación Web, podemos señalar las siguientes:
+
+\begin{milista}
+
+	\item \textbf{Ventajas}
+		\begin{itemize}
+			\item Permite proporcionar a una página HTML de toda la funcionalidad y de todos los mecanismos de protección que proporciona el SGBD.
+			\item Independencia entre el SGBD y la aplicación Web que lo utilice.
+			\item Poder acceder a la base de datos desde cualquier parte del mundo, utilizando la Web.
+			\item Implantación escalable, ya que se pueden distribuir diferentes bases de datos.
+			\item Acceso distribuido a los datos, lo que puede aumentar la velocidad de acceso a éstos cuando se solicita una página Web al servidor.
+		\end{itemize}
+	
+	\item \textbf{Desventajas}
+		\begin{itemize}
+			\item Fiabilidad, ya Internet es un medio de comunicación poco fiable.
+			\item Seguridad en el acceso a los datos.
+			\item Coste que supone mantener los servicios Web, los servidores y las bases de datos.
+			\item Carencia de memoria del protocolo HTTP, lo que obliga a mantener información adicional en el servidor para manejar el acceso a la base de datos. 
+			\item Dificultad para manejar grandes volúmenes de datos con la base de datos, debido a que el ancho de banda de la red es limitado, lo que puede aumentar la latencia de la aplicación Web.
+		\end{itemize}
+	
+\end{milista}
