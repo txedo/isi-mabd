@@ -42,33 +42,35 @@ Perl (Practical Extraction and Report Language) es un lenguaje de programación d
 Por otra parte, PHP (Hypertext Preprocessor) es otro lenguaje de script de código abierto que se incrusta en HTML y que es soportado por multitud de servidores Web. Uno de los mayores usos que tiene es el acceso a bases de datos en el lado del servidor, utilizando como SGBD \textit{MySQL} y como servidor, \textit{HTTP Apache}. 
 
 \subsubsection{Java}
+
+Java es un lenguaje de programación, orientado a objetos e interpretado desarrollado por Sun Microsystems, que se ha convertido en un estándar \textit{de facto} para la programación basada en la Web, permitiendo crear tanto aplicaciones Web (\textbf{applets)}, como aplicaciones de servidor (\textbf{servlets)}. 
+
+Además, Java es un lenguaje independiente de la plataforma, ya que es interpretado en su máquina virtual (JVM - Java Virtual Machine). Otras características de este lenguaje es que posee un recolector de basura, mecanismos de seguridad con comprobación de tipos y la ausencia de punteros. 
+
+En 1999, Sun crea \textbf{J2EE}, una arquitectura pensada para aplicaciones empresariales robustas, escalables, multiusuario y seguras. Esta plataforma incluye todo lo necesario para el desarrollo de aplicaciones Web, aplicaciones de servidor, presentación en el cliente y las comunicaciones necesarias para comunicar el cliente, el servidor y la bases de datos (ver Figura \ref{fig:j2ee}). 
+
+\imagen{./imagenes/j2ee}{0.5}{Arquitectura J2EE simplificada}{fig:j2ee}
+
 \paragraph{JDBC}
-\paragraph{ODBC}
-\paragraph{JSP}
-\subsubsection{ASP.NET}
 
-\subsection{Ventajas y desventajas de la integración Web-SGBD}
+JDBC es la técnica mas utilizada y madura para el acceso a un SGBD relacional desde Java. JDBC define una API para acceder a diferentes SGBD relacionales, soportando toda la funcionalidad SQL básica. Además, por encima del JDBC se construyen interfaces de aplicación a mayor nivel como,  por ejemplo, SQL embebido en Java o una correspondencia directa de tablas de una base de datos relacional a clases Java (Hibernate). 
 
-En lo que se refiere a las ventajas y desventajas de utilizar un SGBD en una aplicación Web, podemos señalar las siguientes:
+Para el acceso a la base de datos por parte de las aplicaciones, hay diferentes opciones:
 
 \begin{milista}
-
-	\item \textbf{Ventajas}
-		\begin{itemize}
-			\item Permite proporcionar a una página HTML de toda la funcionalidad y de todos los mecanismos de protección que proporciona el SGBD.
-			\item Independencia entre el SGBD y la aplicación Web que lo utilice.
-			\item Poder acceder a la base de datos desde cualquier parte del mundo, utilizando la Web.
-			\item Implantación escalable, ya que se pueden distribuir diferentes bases de datos.
-			\item Acceso distribuido a los datos, lo que puede aumentar la velocidad de acceso a éstos cuando se solicita una página Web al servidor.
-		\end{itemize}
-	
-	\item \textbf{Desventajas}
-		\begin{itemize}
-			\item Fiabilidad, ya Internet es un medio de comunicación poco fiable.
-			\item Seguridad en el acceso a los datos.
-			\item Coste que supone mantener los servicios Web, los servidores y las bases de datos.
-			\item Carencia de memoria del protocolo HTTP, lo que obliga a mantener información adicional en el servidor para manejar el acceso a la base de datos. 
-			\item Dificultad para manejar grandes volúmenes de datos con la base de datos, debido a que el ancho de banda de la red es limitado, lo que puede aumentar la latencia de la aplicación Web.
-		\end{itemize}
-	
+	\item Usar el puente JDBC-ODBC, donde el controlador ODBC actúa como nivel mediador entre el SGBD y el controlador JDBC. Es necesario cuando no se puede acceder directamente a las bibliotecas del fabricante del SGBD.
+	\item Usar el controlador JDBC parcial, que convierte llamadas JDBC directamente a llamadas del API del SGBD.
+	\item Usar JDBC puro para middleware de bases de datos, que traduce las llamadas del controlador JDBC al protocolo del middleware, el cual es traducido de nuevo al protocolo del SGBD. De este modo, existe más variedad a la hora de usar diferentes SGBD.
+	\item Usar JDBC puro con conexión directa al SGBD. Esto conlleva utilizar un controlador diferente, según el SGBD que se utilice. 
 \end{milista}
+
+Sea cual sea la opción de comunicación elegida, el proceso de interacción con la base de datos es el siguiente: 
+
+\begin{enumerate}
+	\item Registrarse en el controlador JDBC, utilizando el método \texttt{Class.forName()}.
+	\item Abrir la conexión con el SGBD, utilizando el método \texttt{DriverManager.getConnection()}, indicando la URL del SGBD, que tiene el siguiente formato: \texttt{protocolo:subprotocolo:subnombre}. Por ejemplo: \texttt{jdbc:odbc:www.dreamhome.es.co.uk/dhdatabase}.
+	\item Ejecutar una sentencia SQL sobre la base de datos, con los método \texttt{createStatement} y texttt{execute()}.
+	\item Procesar los resultados obtenidos (si la sentencia era una consulta).
+	\item Cerrar la conexión, con el método \texttt{close()}.
+\end{enumerate}
+

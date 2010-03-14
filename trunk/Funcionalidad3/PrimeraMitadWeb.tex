@@ -89,6 +89,29 @@ FOR $S IN doc(“staff_list.xml”)
 RETURN $S/STAFFNO
 \end{verbatim}
 
+\subsection{Ventajas y desventajas de la integración Web-SGBD}
 
+En lo que se refiere a las ventajas y desventajas de utilizar un SGBD en una aplicación Web, podemos señalar las siguientes:
 
+\begin{milista}
+
+	\item \textbf{Ventajas}
+		\begin{itemize}
+			\item Permite proporcionar a una página HTML de toda la funcionalidad y de todos los mecanismos de protección que proporciona el SGBD.
+			\item Independencia entre el SGBD y la aplicación Web que lo utilice.
+			\item Poder acceder a la base de datos desde cualquier parte del mundo, utilizando la Web.
+			\item Implantación escalable, ya que se pueden distribuir diferentes bases de datos.
+			\item Acceso distribuido a los datos, lo que puede aumentar la velocidad de acceso a éstos cuando se solicita una página Web al servidor.
+		\end{itemize}
+	
+	\item \textbf{Desventajas}
+		\begin{itemize}
+			\item Fiabilidad, ya Internet es un medio de comunicación poco fiable.
+			\item Seguridad en el acceso a los datos.
+			\item Coste que supone mantener los servicios Web, los servidores y las bases de datos.
+			\item Carencia de memoria del protocolo HTTP, lo que obliga a mantener información adicional en el servidor para manejar el acceso a la base de datos. 
+			\item Dificultad para manejar grandes volúmenes de datos con la base de datos, debido a que el ancho de banda de la red es limitado, lo que puede aumentar la latencia de la aplicación Web.
+		\end{itemize}
+	
+\end{milista}
 
