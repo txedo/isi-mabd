@@ -1,0 +1,147 @@
+\section{Bases de datos multimedia}
+
+\subsection{Introducción}
+El término \textbf{multimedia} se aplica a \emph{''algo que utiliza conjunta y simultáneamente diversos medios, como imágenes, sonidos y texto, en la transmisión de una información''} \cite{rae-multimedia}. Por tanto, un \textbf{dato multimedia} es cualquier objeto que cumpla con la definición anterior. De esta definición también podemos extraer los tipos de datos multimedia e inferir acerca de sus características:
+\begin{milista}
+	\item \textbf{Texto}: estructurado o no estructurado, hipermedia.
+	\item \textbf{Gráficos}: dibujos e ilustraciones codificados según un estándar de descripción de archivos (CGM, PICT, PostScript, etc.).
+	\item \textbf{Imágenes}: elementos gráficos codificados según algún formato estándar (mapa de bits, jpeg, png, tiff, etc).
+	\item \textbf{Animaciones}: secuencias temporales de imágenes o datos (gif, swf, etc).
+	\item \textbf{Video}: secuencia temporal de imágenes a una determinada velocidad (fps).
+	\item \textbf{Audio Estructurado}: secuencia de sonidos identificados según nota, tono, duración, etc.
+	\item \textbf{Audio Digital}: secuencia de sonidos digitales.
+	\item \textbf{Datos multimedia compuestos o mezclados}: datos multimedia agregados junto con información sobre los datos (metadatos).
+\end{milista}
+
+Tradicionalmente, las bases de datos se han utilizado para almacenar datos de tipo textual y numérico, pero con la aparición de los datos multimedia se hacen necesarias nuevas bases de datos que puedan almacenar los datos multimedia que se han descrito. De este modo, los sistemas gestores de bases de datos multimedia tienen mucha relación con sistemas de bases de datos objeto-relacionales y los orientados a objetos, ya que pueden almacenar datos multimedia en los siguientes tipos de datos:
+\begin{milista}
+	\item \textbf{BLOB}: (Binary Large Objects): elemento utilizado en las bases de datos para almacenar datos de gran tamaño que cambian de forma dinámica, este es un objeto binario que puede tratar una cantidad de datos variables.
+	\item \textbf{CLOB}: (Character Large Object) Una columna también puede ser del tipo CLOB , que es capaz de almacenar grandes cantidades de datos en formato carácter. Usualmente tiene límites con respecto a la data que guarda, en el orden de los 2 GB Se diferencia del BLOB prácticamente en la forma de encriptado que se usa. En ciertos manejadores, permite los comandos de SQL: LIKE y SUBSTRING al igual que métodos alternativos para acceder a la data
+	\item \textbf{NCLOB}: (National Character Large Object) Un tipo de datos NCLOB de Oracle contiene datos de caracteres basados en el conjunto de caracteres nacional del servidor. Su tamaño máximo es de 4 gigabytes.
+\end{milista}
+
+Por todo lo anterior, en el momento en el que se quiere diseñar y utilizar una base de datos multimedia, el objetivo es poder almacenar grandes volúmenes de información y de diferente naturaleza como son textos, sonidos, imágenes, videos, etc. permitiendo que estos volúmenes de datos estén distribuidos en diferentes plataformas y localizaciones geográficas. Por esta última razón, las bases de datos multimedia tienen dos características principales: un entorno de fácil utilización por parte del usuario y el establecimiento de redes de telecomunicaciones de alta velocidad.
+
+Para terminar, podemos distinguir entre dos tipos de bases de datos multimedia:
+\begin{milista}
+	\item \textbf{Bases de datos referenciales:} son bases de datos que pueden almacenar información como películas, imágenes, música, etc. En la mayoría de los casos, la información que se almacena hace referencia a cuestiones descriptivas (autor, título, duración, productor, etc.) o a cuestiones técnicas (formato, duración, etc.).
+	\item \textbf{Bases de datos descriptivas:} son bases de datos que además de mantener las cuestiones descriptivas o técnicas, como las bases de datos anteriores, aportan información específica sobre el contenido indicando, por ejemplo, dónde se situan los cambios de plano dentro de una película, etc.
+\end{milista}
+
+
+\subsection{Sistemas de gestión de bases de datos multimedia}
+Los sistemas de gestión de bases de datos multimedia, también llamados \textit{gestores de información hipermedia}, se basan en un SGBD objeto-relacional, como ya se ha comentado en la sección anterior. Sin embargo, un SGBD multimedia cuenta con los siguientes componentes:
+
+\begin{enumerate}
+	\item \textbf{Base de presentación:} parámetros a aplicar para mostrar información al usuario.
+	\item \textbf{Base de estructura:} visión lógica del hiperdocumento, según un modelo.
+	\item \textbf{Base de contenido:} conjunto de documentos que se integran en el hiperdocumento.
+	\item \textbf{Base de utilización:} información sobre hábitos y comportamiento de cada usuario.
+\end{enumerate}
+
+Por otra parte, un SGBD multimedia debe cumplir con los siguientes requisitos:
+\begin{milista}
+	\item Encontrar rápidamente la información multimedia.
+	\item Conectar documentos según su contenido.
+	\item Facilitar el acceso instantáneo a la información multimedia, incluyendo los mecanismos necesarios de compresión y descompresión para su manipulación.
+	\item Crear relaciones entre los distintos tipos de datos multimedia. 
+	\item Búsqueda por texto completo.
+	\item Administración de sinónimos.
+	\item Búsqueda de similares.
+\end{milista}
+
+
+\subsection{Operaciones sobre las bases de datos multimedia}
+
+Debido a la naturaleza tan variada de los datos que debe manejar este tipo de bases de datos, se hace necesario encontrar un modelo que
+permita describir la estructura de la diferente información multimedia. Es decir, según la naturaleza del dato multimeda, sería más adecuado utilizar uno u otro modelo, esto es, uno u otro SGBD. 
+
+Por ejemplo, para almacenar texto, se puede utilizar un SGBD relacional, mientras que para almacenar objetos de video o imágenes, una mejor opción sería un SGBD orientado a objetos. 
+
+A continuación, se comentará el modo de almacenar y recuperar los tipos de datos multimedia más extendidos, como son las imágenes, vídeo y texto. 
+
+\subsubsection{Almacenamiento de datos multimedia}
+
+\paragraph{Indexación de texto} \label{indexacion-texto}
+
+Para almacenar un objeto multimedia de tipo texto, se emplea un SGBD relacional para almacenar, como atributos, los diferentes términos que se pueden extraer del texto del documento. Además, si se almacena el documento completo, éste se puede guardar en una base de datos orientada a objeto. 
+
+Para obtener los términos que se almacenan en la base de datos, el texto se somente a un proceso de eliminación de ruido, para sólo almacenar aqueelos términos con significado y que sean relevantes. Para esto, se aplican técnicas de \textit{stemming} (agrupación de términos según su raíz), eliminación de palabras sin sentido, como artículos o preposiciones (llamadas \textit{stopwords}), etc.
+
+\paragraph{Indexación de imágenes}
+
+A la hora de indexar la información de una imagen, se puede optar por técnicas de procesamiento automático de imágenes o por la asignación manual de
+características. La primera de estas técnicas facilita la indexación de grandes colecciones de imágenes, ya que se asignan descriptores (color, brillo, forma, etc.) a las imágenes de manera automática.
+
+Existen varias implementaciones a la hora de extraer los descriptores de las imágenes. Generalmente consiste en crear una representacion del descriptor en forma de cadena de caracteres.
+
+Sin embargo, esta técnica es menos fiable, ya que pueden existir características que no puedan ser identificadas de manera automática. En este caso, la asignación manual puede resolver esta carencia, ya que los descriptores se asignan según el conocimiento de la persona que procesa la imagen. Sin embargo, este método resulta inviable a la hora de procesar grandes colecciones de imágenes. 
+
+Para almacenar este tipo de dato multimedia, se suele utilizar una base de datos objeto-relacional, debido al tamaño de los descriptores, que suelen almacenarse como un tipo \textit{BLOB}, como se puede ver en la Figura \ref{fig:baseDatos}
+
+\imagen{./imagenes/BDmultimedia}{0.5}{Ejemplo de base de datos con descriptores de imágenes}{fig:baseDatos}
+
+\paragraph{Indexación de video} \label{indexacion-video}
+
+Para indexar un video, en primer lugar éste se divide en \textbf{shots}, que puden definirse como \textit{un conjunto de frames grabados secuencialmente que representan una acción continua en el tiempo y espacio y que ha sido tomada por una sola cámara} (\cite{piattini}). Una vez tomados estos \textit{shots}, se obtienen los \textit{key frames} (ver figura \ref{fig:shots}) de cada uno de ellos y, a partir de ellos, como los frames ya son imágenes, se aplican las técnicas de extracción de descriptores comentados en el apartado anterior. 
+
+	\imagen{./imagenes/shots.png}{0.4}{Ejemplo de shots y key frames de un video}{fig:shots}
+
+Cabe destacar que para este caso, se utiliza un SGBD objeto-relacional para los descriptores, y un SGBD orientado a objetos donde se almacena el archivo de video en sí y los diferentes \textit{key frames}.
+
+
+
+\subsubsection{Recuperación de datos multimedia}
+La recuperación de información multimedia de la bases de datos es una cuestión importante que hay que resolver de forma eficiente. En esta sección se explican algunas técnicas de recuperación de datos multimedia basándose en el contenido de éstos.
+
+
+\paragraph{Recuperación de texto} \label{recuperacion-texto}
+
+Para la recuperación de texto existen numerosas aproximaciones. Las más famosas son el modelo booleano, el modelo estadístico y el modelo vectorial, siendo este último -con algunas mejoras- el más utilizado.
+
+Cuando el usuario introduce una cadena de texto -denominada vector pregunta- para realizar una búsqueda, esta cadena se someterá al mismo preprocesamiento de texto al que se sometieron los textos que forman parte de la base documental en el momento de la indexación \ref{indexacion-texto}, con el objetivo de eliminar ruido y buscar únicamente términos relevantes.
+
+En el modelo vectorial se utilizan vectores multidimensionales. La pregunta y cada uno de los documentos de la base documental se representan mediante un vector, en el que cada término define una dimensión. Para calcular la similitud entre dos vectores (el vector pregunta y un vector documento) se calcula el ángulo que forman ambos vectores. Si ambos vectores son perpendiculares, el grado de similitud es nulo; si por el contrario son paralelos, significa que son muy similares.
+
+No obstante, cuando se trabaja con texto existen problemas relaccionados con la ambigüedad del lenguaje, el contexto, las faltas de ortografía, etc.
+
+
+\paragraph{Recuperación de imágenes} \label{recuperacion-imagen}
+La recuperación de imágenes consiste en extraer imágenes relevantes para los usuarios de una gran colección de datos. La relevancia está determinada por la naturaleza de la aplicación. Por ejemplo, en una base de datos de imágenes de tejidos, las imágenes relavantes serían aquellas que sean similares en términos de textura y color. Muchos SGBD relacionales soportan campos para BLOBs (Binary Large Objects) y facilitan el acceso a atributos definidos por el usuario (fecha, hora, tipo de dato, resolución de imagen, etc.). En definitiva, estos sistemas analizan el contenido visual de las imágenes e indexan los descriptores que infieren.
+
+A continuación se muestran algunos tipos de consultas para la recuperación de imágenes:
+\begin{milista}
+	\item \textit{Consulta de descriptores}: el usuario indica los valores de determinados descriptores como el brillo, contraste, forma, color, textura, etc.
+	\item \textit{Consulta de combinación de descriptores}: el usuario combina diferentes descriptores e indica sus valores y pesos.
+	\item \textit{Consulta de descriptores específicos}: el usuario especifica los valores y localizaciones de determinados descriptores que deben darse en la imagen.
+	\item \textit{Consulta por similitud}: la similitud puede ser determinada basándose en una serie de descriptores seleccionadas por el usuario. En este tipo de consultas el sistema genera un conjunto aleatorio de imágenes, el usuario selecciona una y el sistema devuelve imágenes similares (ver figura \ref{fig:parecidos-razonables}).	
+	\item \textit{Comparación de objetos e imágenes}: el usuario puede describir los descriptores de un objeto que debe aparecer en una imagen.
+	\item \textit{Consulta de relación de objetos}: el usuario especifica objetos, sus atributos y relaciones entre ellos.
+	\item \textit{Consultas de conceptos}: algunos sistemas permiten al usuario que definan conceptos sencillos basándose en los valores y localizaciones de descriptores con los que trabaja el sistema.
+\end{milista}
+
+	\imagen{./imagenes/parecidos-razonables.jpg}{0.4}{Ejemplos de búsqueda por similitud}{fig:parecidos-razonables}
+	
+
+\paragraph{Recuperación de video} \label{recuperacion-video}
+
+Como se ha visto en la sección \ref{indexacion-video}, cuando se trabaja con video se manejan los conceptos \textit{shot} y \textit{key frame}.
+
+Cuando un sistema indexa un video realiza un proceso de extracción de descriptores. Los descriptores que se pueden extraer de un video son texto, iconos e imágenes y serán indexadas del mismo modo que si fuesen procesos separados. Por tanto, cuando se trata de recuperar un video se utiliza una combinación de las técnicas de recuperación de textos \ref{recuperacion-texto} y recuperación de imágenes \ref{recuperacion-imagen}.
+
+
+\subsection{Ventajas e inconvenientes de una base de datos multimedia}
+\begin{milista}
+	\item \textbf{Ventajas}
+	\begin{itemize}
+		\item La posibilidad de integrar en un único sistema una gran diversidad de formatos (imágenes, texto, video, sonido, etc).
+		\item Ofrecen mayor variedad a la hora de representar la información.
+		\item Un gran, y creciente, mercado potencial que augura que se	siga investigando activamente en el futuro.
+	\end{itemize}
+	\item \textbf{Desventajas}
+	\begin{itemize}
+		\item Necesita grandes espacios para almacenar toda la información que queremos.
+		\item Este tipo de bases de datos necesitan grandes anchos de banda para obtener un rendimiento óptimo.
+		\item Complejidad en cuanto a programar operaciones, o incluso la interfaz, debido a la alta cantidad de formatos que hay que manejar, lo que puede repercutir en su rendimiento.
+	\end{itemize}
+\end{milista}

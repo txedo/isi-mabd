@@ -1,0 +1,38 @@
+\subsection{Recuperación basada en contenido}
+
+La recuperación de información multimedia de la bases de datos es una cuestión importante que hay que resolver de forma eficiente. En esta sección se explican algunas técnicas de recuperación de datos multimedia basándose en el contenido de éstos.
+
+
+\subsubsection{Recuperación de texto} \label{recuperacion-texto}
+
+Para la recuperación de texto existen numerosas aproximaciones. Las más famosas son el modelo booleano, el modelo estadístico y el modelo vectorial, siendo este último -con algunas mejoras- el más utilizado.
+
+Cuando el usuario introduce una cadena de texto -denominada vector pregunta- para realizar una búsqueda, esta cadena se someterá al mismo preprocesamiento de texto al que se sometieron los textos que forman parte de la base documental en el momento de la indexación \ref{indexacion-texto}, con el objetivo de eliminar ruido y buscar únicamente términos relevantes.
+
+En el modelo vectorial se utilizan vectores multidimensionales. La pregunta y cada uno de los documentos de la base documental se representan mediante un vector, en el que cada término define una dimensión. Para calcular la similitud entre dos vectores (el vector pregunta y un vector documento) se calcula el ángulo que forman ambos vectores. Si ambos vectores son perpendiculares, el grado de similitud es nulo; si por el contrario son paralelos, significa que son muy similares.
+
+No obstante, cuando se trabaja con texto existen problemas relaccionados con la ambigüedad del lenguaje, el contexto, las faltas de ortografía, etc.
+
+
+\subsubsection{Recuperación de imágenes} \label{recuperacion-imagen}
+La recuperación de imágenes consiste en extraer imágenes relevantes para los usuarios de una gran colección de datos. La relevancia está determinada por la naturaleza de la aplicación. Por ejemplo, en una base de datos de imágenes de tejidos, las imágenes relavantes serían aquellas que sean similares en términos de textura y color. Muchos SGBD relacionales soportan campos para BLOBs (Binary Large Objects) y facilitan el acceso a atributos definidos por el usuario (fecha, hora, tipo de dato, resolución de imagen, etc.). En definitiva, estos sistemas analizan el contenido visual de las imágenes e indexan los descriptores que infieren.
+
+A continuación se muestran algunos tipos de consultas para la recuperación de imágenes:
+\begin{milista}
+	\item \textit{Consulta de descriptores}: el usuario indica los valores de determinados descriptores como el brillo, contraste, forma, color, textura, etc.
+	\item \textit{Consulta de combinación de descriptores}: el usuario combina diferentes descriptores e indica sus valores y pesos.
+	\item \textit{Consulta de descriptores específicos}: el usuario especifica los valores y localizaciones de determinados descriptores que deben darse en la imagen.
+	\item \textit{Consulta por similitud}: la similitud puede ser determinada basándose en una serie de descriptores seleccionadas por el usuario. En este tipo de consultas el sistema genera un conjunto aleatorio de imágenes, el usuario selecciona una y el sistema devuelve imágenes similares (ver figura \ref{fig:parecidos-razonables}).	
+	\item \textit{Comparación de objetos e imágenes}: el usuario puede describir los descriptores de un objeto que debe aparecer en una imagen.
+	\item \textit{Consulta de relación de objetos}: el usuario especifica objetos, sus atributos y relaciones entre ellos.
+	\item \textit{Consultas de conceptos}: algunos sistemas permiten al usuario que definan conceptos sencillos basándose en los valores y localizaciones de descriptores con los que trabaja el sistema.
+\end{milista}
+
+	\imagen{./imagenes/parecidos-razonables.jpg}{0.6}{Ejemplos de búsqueda por similitud}{fig:parecidos-razonables}
+	
+
+\subsubsection{Recuperación de video} \label{recuperacion-video}
+
+Como se ha visto en la sección \ref{indexacion-video}, cuando se trabaja con video se manejan los conceptos \textit{shot} y \textit{key frame}.
+
+Cuando un sistema indexa un video realiza un proceso de extracción de descriptores. Los descriptores que se pueden extraer de un video son texto, iconos e imágenes y serán indexadas del mismo modo que si fuesen procesos separados. Por tanto, cuando se trata de recuperar un video se utiliza una combinación de las técnicas de recuperación de textos \ref{recuperacion-texto} y recuperación de imágenes \ref{recuperacion-imagen}.
