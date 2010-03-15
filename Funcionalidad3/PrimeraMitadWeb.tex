@@ -16,9 +16,9 @@ Con todo ello, se puede resumir el funcionamiento de un navegador Web en los sig
 	\item El navegador muestra la página web en la pantalla del usuario.
 \end{enumerate}
 
-Como se puede comprobar, el intercambio de información entre el cliente y el servidor es posible gracias a que, entre otras cosas, las páginas Web utilizan el lenguaje HTML. Sin emabargo, tradicionalmente, se han utilizado documentos HTML estáticos, para los cuales se creaban las posibles respuestas ante las peticiones del cliente. Pero, en la actualidad, surge la posibilidad de utilizar aplicaciones que permitan acceder a información de forma dinámica, con contenidos y formatos muy diversos. Esto ha hecho que sea necesaria la integración de los SGBDs en los servidores Web, para poder recuperar la información de la base de datos según la petición que envie el cliente.
+Como se puede comprobar, el intercambio de información entre el cliente y el servidor es posible gracias a que, entre otras cosas, las páginas Web utilizan el lenguaje HTML. Sin embargo, tradicionalmente, se han utilizado documentos HTML estáticos, para los cuales se creaban las posibles respuestas ante las peticiones del cliente. Pero en la actualidad surge la posibilidad de utilizar aplicaciones que permitan acceder a información de forma dinámica, con contenidos y formatos muy diversos. Esto ha hecho que sea necesaria la integración de los SGBDs en los servidores Web, para poder recuperar la información de la base de datos según la petición que envie el cliente.
 
-Así, en la sección \ref{estatica-dinamica} se van a comentar las diferencias existentes entre una página Web estática y una página Web dinámica, además de comentar brevemente los servicios Web. En la sección \ref{requisitos} se van a comentar las características o requisitos que debe tener una base de datos para su uso en la Web, así como sus ventajas y desventajas. Para terminar ......... (TXEDO).
+Así, en la sección \ref{estatica-dinamica} se van a comentar las diferencias existentes entre una página Web estática y una página Web dinámica, además de comentar brevemente los servicios Web. En la sección \ref{requisitos} se van a comentar las características o requisitos que debe tener una base de datos para su uso en la Web, así como sus ventajas y desventajas. Por último, se describirán brevemente algunas de las técnicas y lenguajes de programación que se emplean hoy en día para acceder a las bases de datos desde aplicaciones web.
 
 \subsection{Páginas Web estáticas y dinámicas} \label{estatica-dinamica}
 
@@ -46,7 +46,7 @@ Las tecnologías estándares que utiliza un servicio Web para esta interoperabilid
 
 En el caso de los servicios Web, como al fin y al cabo son aplicaciones Web, es también necesario el uso de base de datos, para poder acceder a la información que necesita la aplicación pasa su funcionamiento. 
 
-\subsection{Integración Web-SGBD}
+\subsection{Integración Web-SGBD} \label{requisitos}
 
 En la Web, no se puede hablar de un tipo de SGBD específico, como puede ocurrir en otros tipos de bases de datos, como pueden ser las orientadas a objetos. Si bien es cierto que existen fabricantes que tratan de proporcionar soluciones propietarias de conectividad, la mayoría de empresas prefieren utilizar un SGBD más general, para no atarse a una tecnología concreta. Así, las bases de datos Web no son más que SGBD utilizados y orientados a la Web, de tal modo que se utiliza el SGBD que más se adapte a la naturaleza de la información que debe manejar la aplicación Web correspondiente.  
 
@@ -64,7 +64,7 @@ No obstante, existe un tipo especial de SGBD que se utiliza para datos semi-estr
 
 Por tanto, para tratar con este tipo de datos, que abunda en la Web, se utilizan los siguiente modelos y SGBD específicos:
 
-\subsubsection{Modelo de Intercambio de Objetos (OEM - Object Exchange Model}
+\subsubsection{Modelo de Intercambio de Objetos (OEM - Object Exchange Model)}
 
 OEM (\cite{oem}) es un modelo de objetos anidados que fue diseñado para su uso en diferentes proyectos del \textit{Grupo de Bases de Datos de la Universidad de Standford}, para soportar la integración de datos de diferentes orígenes de datos. Los datos OEM son carentes de esquema y pueden considerarse como un grafo dirigido etiquetado (ver Figura \ref{fig:oem}), donde los nodos son objetos. A su vez, cada objeto está compuesto por un identificador, una etiqueta descriptiva, un tipo de datos y un valor. En cuanto a los tipos de datos, éstos pueden ser simples (\textit{string}, \textit{int}, etc.) y no tienen conexiones con otros nodos del grafo, o puden ser otros objetos, que se conectan con otros nodos del grafo.
 

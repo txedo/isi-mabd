@@ -23,7 +23,7 @@ Como desventaja se puede destacar la baja eficiencia que tiene el uso de CGI, de
 
 \subsubsection{Lenguajes de script}
 
-Un \textit{script} es un código escrito en un lenguaje de porgramación que se incrusta en el código HTML de una página Web y que se puede ejecutar en el lado del servidor o del cliente, añadiendo nuevas funcionalidades a la página Web. De esta forma, se pueden automatizar funciones para acceder a los datos de la base de datos, creando nuevo código HTML y mostrando así lás páginas Web personalizadas con los datos que pide el cliente. 
+Un \textit{script} es un código escrito en un lenguaje de programación que se incrusta en el código HTML de una página Web y que se puede ejecutar en el lado del servidor o del cliente, añadiendo nuevas funcionalidades a la página Web. De esta forma, se pueden automatizar funciones para acceder a los datos de la base de datos, creando nuevo código HTML y mostrando así lás páginas Web personalizadas con los datos que pide el cliente. 
 
 Algunos de los lenguajes de script más utilizados actualmente se comentan a continuación.
 
@@ -41,6 +41,11 @@ Perl (Practical Extraction and Report Language) es un lenguaje de programación d
 
 Por otra parte, PHP (Hypertext Preprocessor) es otro lenguaje de script de código abierto que se incrusta en HTML y que es soportado por multitud de servidores Web. Uno de los mayores usos que tiene es el acceso a bases de datos en el lado del servidor, utilizando como SGBD \textit{MySQL} y como servidor, \textit{HTTP Apache}. 
 
+
+\subsubsection{ODBC}
+ODBC (Open Database Connectivity) proporciona una interfaz común, desarrollada por Microsoft, para acceder a bases de datos SQL. Gracias a ella, el acceso de las aplicaciones a las bases de datos se hace de un modo totalmente transparente. ODBC actua como una capa intermedia, por lo que es necesario configurar el origen de datos cargando el driver que necesite para interaccionar con el SGDB en cuestión.
+
+
 \subsubsection{Java}
 
 Java es un lenguaje de programación, orientado a objetos e interpretado desarrollado por Sun Microsystems, que se ha convertido en un estándar \textit{de facto} para la programación basada en la Web, permitiendo crear tanto aplicaciones Web (\textbf{applets)}, como aplicaciones de servidor (\textbf{servlets)}. 
@@ -50,6 +55,11 @@ Además, Java es un lenguaje independiente de la plataforma, ya que es interpreta
 En 1999, Sun crea \textbf{J2EE}, una arquitectura pensada para aplicaciones empresariales robustas, escalables, multiusuario y seguras. Esta plataforma incluye todo lo necesario para el desarrollo de aplicaciones Web, aplicaciones de servidor, presentación en el cliente y las comunicaciones necesarias para comunicar el cliente, el servidor y la bases de datos (ver Figura \ref{fig:j2ee}). 
 
 \imagen{./imagenes/j2ee}{0.5}{Arquitectura J2EE simplificada}{fig:j2ee}
+
+\paragraph{JSP}
+JSP (Java Server Pages) es un lenguaje de \textit{script} basado en Java que se ejecuta en el lado del servidor. Permite mezclar HTML estático con HTML generado dinámicamente de un modo similar a PHP.
+
+Cuando un cliente hace una petición de una página JSP, el servidor procesa todo el código Java que hay en su interior para generar un servlet y devuelve al cliente un flujo de código HTML. Por esto, es necesario que el servidor Web sea capaz de compilar y ejecutar código Java. Algunos servidores de los que se dispone son Apache Tomcat, JBoss y WebSphere (un plug-in de IIS - Microsoft Internet Information Server).
 
 \paragraph{JDBC}
 
@@ -69,8 +79,13 @@ Sea cual sea la opción de comunicación elegida, el proceso de interacción con la
 \begin{enumerate}
 	\item Registrarse en el controlador JDBC, utilizando el método \texttt{Class.forName()}.
 	\item Abrir la conexión con el SGBD, utilizando el método \texttt{DriverManager.getConnection()}, indicando la URL del SGBD, que tiene el siguiente formato: \texttt{protocolo:subprotocolo:subnombre}. Por ejemplo: \texttt{jdbc:odbc:www.dreamhome.es.co.uk/dhdatabase}.
-	\item Ejecutar una sentencia SQL sobre la base de datos, con los método \texttt{createStatement} y texttt{execute()}.
+	\item Ejecutar una sentencia SQL sobre la base de datos, con los método \texttt{createStatement} y \texttt{execute()}.
 	\item Procesar los resultados obtenidos (si la sentencia era una consulta).
 	\item Cerrar la conexión, con el método \texttt{close()}.
 \end{enumerate}
 
+
+\subsubsection{ASP.NET}
+ASP.NET es un modelo de programación que permite crear páginas web interactivas y dinámicas de un modo similar a JSP y PHP. Es la versión avanzada de ASP (Active Server Pages) que ha sido rediseñada para mejorar sus prestaciones y la escalabilidad. Esto es debido a la incorporación de la biblioteca de clases de .NET, que es una colección de clases reutilizables, interfaces y tipos que se intengran dentro de un entorno común para proporcionar funcionalidades como la gestión de cadenas de caracteres, las comunicaciones por red, la gestión de hilos, etc.
+
+Además, con ASP.NET se dispone de ADO.NET que es un conjnto de clases que exponen los servicios de acceso a datos para que puedan ser utilizados por el programador de .NET.

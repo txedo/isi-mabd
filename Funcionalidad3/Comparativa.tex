@@ -1,0 +1,25 @@
+\section{Comparativa}
+
+\subsection{Similitudes}
+\begin{milista}
+	\item Ambas bases de datos deben  soportar grandes volúmenes de datos.
+	\item Aunque no es estrictamente necesario que las bases de datos multimedia sean concurrentes, es aconsejable, y para las bases de datos web es obligatorio, ya que debe dar servicio a muchos usuarios al mismo tiempo.
+	\item Una base de datos multimedia puede utilizarse como base de datos web siempre y cuando disponga de la capa de comunicación entre el SGBD y el usuario que está utilizando la aplicación.
+	\item Los dos tipos de bases de datos pueden utilizar sistemas gestores de bases de datos tanto relacionales, como objeto-relacionales, etc…
+\end{milista}
+
+\subsection{Diferencias}
+\begin{milista}
+\item Web
+	\begin{milista}
+		\item Las bases de datos web deben disponer obligatoriamente de sistemas de seguridad.
+		\item Deben estar orientadas a sesión.
+		\item Las bases de datos web pueden estar basadas en XML, y para ello utilizan sistemas gestores de bases de datos nativos de XML (NXD, que utiliza el lenguaje XQuery).
+	\end{milista}
+
+\item Multimedia:
+	\begin{milista}
+		\item Mientras que en las bases de datos web debemos conocer exactamente como es el objeto que estamos intentando recuperar, en las multimedia no ocurre lo mismo, ya que las búsquedas pueden estar basadas en ejemplo y en las web recuperamos un objeto en concreto (conociendo de antemano sus características).
+		\item De lo anterior puede derivarse que el uso de bases de datos multimedia aporta más funcionalidad al poder buscar por descriptores, similitud, metadatos, etc.
+	\end{milista}
+\end{milista}
