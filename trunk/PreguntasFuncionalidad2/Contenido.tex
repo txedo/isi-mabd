@@ -1,0 +1,60 @@
+\section{Preguntas seleccionadas}
+
+\paragraph{Pregunta} Como se ha comentado en el trabajo, las bases de datos deductivas se utilizan para almacenar datos de la vida real y a partir de ahí deducir información que en principio no está almacenada en la base de datos, pero ¿qué aplicación real podría tener el uso de estas bases de datos en la vida real?
+
+\paragraph{Respuesta} Las bases de datos deductivas están recomendadas cuando se tienen grandes cantidades de información y se necesitan sistemas que analicen esta información e infiera información nueva, como por ejemplo las áreas que cubre la inteligencia artificial. Algunas de estas son: 
+Decission support system. En esta área las bases de datos deductivas ayudan a tomar decisiones para planificar el futuro relacionando la información que ya tenemos almacenada en la base de datos. 
+Expert Systems. Estos sistemas son utilizados en medicina en los que se obtiene mucha información cuando ésta es monitorizada. La información se almacena en bases de datos deductivas y posteriormente se obtienen conclusiones. 
+Análisis del Genoma Humano. Sakamoto, Goto y Takagi trabajan con un sistema de bases de datos deductiva que permite hacer  minería de datos mediante la especificación de reglas, muchas de ellas de forma recursiva, utilizando un lenguaje declarativo y no basado en procedimientos como se hace en la programación tradicional. 
+
+\clearpage
+
+\paragraph{Pregunta} En el trabajo se habla sobre distintos modelos de bases de datos relacionales difusas, pero no se hace referencia a modelos de bases de datos entidad-interrelación. Nombre algún ejemplo de modelo de base de datos entidad-interrelación difusa.
+
+\paragraph{Respuesta} Un modelo entidad-interrelación difuso es el llamado FuzzyEER. Es una extensión del modelo entidad-interrelación que incluye un conjunto de constructores para manejar información imprecisa.
+
+En FuzzyERR se maneja el concepto de grado para indicar el nivel en que un elemento del esquema cumple con una determinada característica.
+Dichos grados pueden ser:
+
+\begin{milista}
+
+\item \textbf{Grado de pertenencia:} La pertenencia de un valor a una instancia concreta puede ser cuantificada por un grado.
+
+\item \textbf{Grado de satisfacción:} En una instancia, una propiedad puede cumplirse con cierto grado entre dos extremos.
+
+\item \textbf{Grado de incertidumbre:} Expresa la certeza con la que conocemos un dato determinado para una instancia concreta.
+
+\item \textbf{Grado de posibilidad:} Mide la posibilidad de la información  que se está modelando para cada instancia de la entidad.
+
+\item \textbf{Grado de importancia:} Distintos valores de un atributo pueden tener diferentes importancias de forma que pueden existir distintos valores para un mismo atributo que tengan distinta importancia.
+
+\end{milista}
+
+\clearpage
+
+\section{Pregunta descartada}
+
+\paragraph{Pregunta}
+
+En el trabajo se habla sobre el lenguaje FSQL, sus características, comparadores y umbral de cumplimiento, pero no se muestra ningún ejemplo de uso 
+de la sintaxis. Muestre algún ejemplo.
+
+\paragraph{Respuesta}
+
+Suponiendo que tenemos una base de datos con información sobre personas:
+
+''Recuperar todas las personas cuya edad es aproximadamente 12 años:''
+
+\begin{verbatim}
+	SELECT * FROM Personas
+	WHERE Edad FEQ #20 THOLD 0.6;
+\end{verbatim}
+
+''Recuperar todas las personas más o menos Morenas (con grado mínimo 0.3) cuya edad es posiblemente superior a Joven (con grado mínimo 0.6):''
+
+\begin{verbatim}
+	SELECT * FROM Personas WHERE
+	Pelo FEQ $Rubio THOLD 0.5 AND
+	Edad FGT $Joven THOLD 0.8;
+\end{verbatim}
+
