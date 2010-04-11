@@ -1,0 +1,23 @@
+\section{Preguntas seleccionadas}
+
+\paragraph{Pregunta} En el trabajo se comentan las bases de datos nativas para XML. ¿Estas bases de datos soportan restricciones de integridad referencial, al igual que una base de datos relacional?
+
+\paragraph{Respuesta} Según \cite{XML}, la integridad referencial en bases de datos XML nativas se refiere a asegurar que las referencias que aparecen dentro de un documento XML apuntan a otros documentos existentes y válidos. Además, existen dos tipos de integridad referencial en las bases de datos XML: integridad interna (punteros dentro de un mismo documento) e integridad externa (punteros entre documentos). 
+
+La mayoría de las bases de datos XML nativas realizan la validación de las referencias internas al insertar los documentos en la base de datos. También se validan las referencias internas cuando se hacen modificaciones a nivel de documento (se elimina y luego se vuelve a insertar el documento). \\
+\indent En cuanto a la integridad externa, la mayoría de las bases de datos XML nativas no la soportan.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\paragraph{Pregunta} En la página 18 del trabajo, donde se trata acerca de XQuery, sólo se hace referencia a éste como un lenguaje de consulta. ¿Permite XQuery la inserción o modificación de datos en una base de datos XML? En caso negativo, ¿de qué formas se pueden manipular los datos en una base de datos XML?
+
+\paragraph{Respuesta} Sólo se hace mención del lenguaje XQuery como lenguaje de consulta porque éste carece de la posibilidad de realizar inserciones o modificaciones en los datos. No obstante, Microsoft ha desarrollado una extensión de dicho lenguaje para permitir este tipo de operaciones, llamada XML Data Modification Language (XML DML) \cite{xml-dml}.
+% http://msdn.microsoft.com/en-us/library/ms177454.aspx
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\paragraph{Pregunta} A día de hoy, el comercio electrónico es una práctica llevada a cabo por muchas empresas y que genera grandes beneficios. ¿Sería conveniente utilizar una base de datos XML en este tipo de sistemas?
+
+En sistemas de comercio electrónico en particular, así como en sistemas que manejan grandes volúmenes de datos y en los que el tiempo de respuesta es crítico, las bases de datos XML no son la mejor opción ya que cada vez que se realiza una consulta es necesario recorrer todo el árbol. Para este tipo de sistemas es más eficiente utilizar bases de datos relacionales u orientadas a objetos.
+
+
+\clearpage
