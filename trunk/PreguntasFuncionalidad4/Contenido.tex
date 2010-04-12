@@ -1,5 +1,18 @@
 \section{Preguntas seleccionadas}
 
+\paragraph{Pregunta} En el trabajo se habla de los departamentos de una organización como productor de información, pero los productores pueden ser externos a nuestra organización. Esto representa un problema debido a la falta de heterogeneidad en la estructuración de los datos en los almacenes de datos. ¿Es posible procesar los datos de manera automática una vez obtenidos los mismos?
+
+\paragraph{Respuesta} No es posible procesar de manera automática datos porque la representación de los mismos (diminutivos en los nombres, campos compuestos representados como uno solo, etc) depende fuertemente de la base de datos en la que estén almacenados. Por tanto antes de adoptar los datos externos es necesario conocer detalladamente la estructura del almacén del que extraeremos la informacion para seleccionar las correspondencias de los campos de varios almacenes para poder hacer una fusión lo más homogénea posible.
+
+\vspace{20mm}
+
+\paragraph{Pregunta} En la página 18 del trabajo, donde se trata acerca de XQuery, sólo se hace referencia a éste como un lenguaje de consulta. ¿Permite XQuery la inserción o modificación de datos en una base de datos XML? En caso negativo, ¿de qué formas se pueden manipular los datos en una base de datos XML?
+
+\paragraph{Respuesta} Sólo se hace mención del lenguaje XQuery como lenguaje de consulta porque éste carece de la posibilidad de realizar inserciones o modificaciones en los datos. No obstante, Microsoft ha desarrollado una extensión de dicho lenguaje para permitir este tipo de operaciones, llamada XML Data Modification Language (XML DML) \cite{xml-dml}.
+
+\clearpage
+\section{Preguntas descartadas}
+
 \paragraph{Pregunta} En el trabajo se comentan las bases de datos nativas para XML. ¿Estas bases de datos soportan restricciones de integridad referencial, al igual que una base de datos relacional?
 
 \paragraph{Respuesta} Según \cite{XML}, la integridad referencial en bases de datos XML nativas se refiere a asegurar que las referencias que aparecen dentro de un documento XML apuntan a otros documentos existentes y válidos. Además, existen dos tipos de integridad referencial en las bases de datos XML: integridad interna (punteros dentro de un mismo documento) e integridad externa (punteros entre documentos). 
@@ -8,21 +21,14 @@ La mayoría de las bases de datos XML nativas realizan la validación de las refer
 \indent En cuanto a la integridad externa, la mayoría de las bases de datos XML nativas no la soportan.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%
-\paragraph{Pregunta} En la página 18 del trabajo, donde se trata acerca de XQuery, sólo se hace referencia a éste como un lenguaje de consulta. ¿Permite XQuery la inserción o modificación de datos en una base de datos XML? En caso negativo, ¿de qué formas se pueden manipular los datos en una base de datos XML?
 
-\paragraph{Respuesta} Sólo se hace mención del lenguaje XQuery como lenguaje de consulta porque éste carece de la posibilidad de realizar inserciones o modificaciones en los datos. No obstante, Microsoft ha desarrollado una extensión de dicho lenguaje para permitir este tipo de operaciones, llamada XML Data Modification Language (XML DML) \cite{xml-dml}.
-
-
+\vspace{20mm}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 \paragraph{Pregunta} A día de hoy, el comercio electrónico es una práctica llevada a cabo por muchas empresas y que genera grandes beneficios. ¿Sería conveniente utilizar una base de datos XML en este tipo de sistemas?
 
-En sistemas de comercio electrónico en particular, así como en sistemas que manejan grandes volúmenes de datos y en los que el tiempo de respuesta es crítico, las bases de datos XML no son la mejor opción ya que cada vez que se realiza una consulta es necesario recorrer todo el árbol. Para este tipo de sistemas es más eficiente utilizar bases de datos relacionales u orientadas a objetos.
+\paragraph{Respuesta} En sistemas de comercio electrónico en particular, así como en sistemas que manejan grandes volúmenes de datos y en los que el tiempo de respuesta es crítico, las bases de datos XML no son la mejor opción ya que cada vez que se realiza una consulta es necesario recorrer todo el árbol. Para este tipo de sistemas es más eficiente utilizar bases de datos relacionales u orientadas a objetos.
 
 
 \clearpage
 
-\paragraph{Pregunta} En el trabajo se habla de los departamentos de una organización como productor de información, pero los productores pueden ser externos a nuestra organización. Esto representa un problema debido a la falta de heterogeneidad en la estructuración de los datos en los almacenes de datos. ¿Es posible procesar los datos de manera automática una vez obtenidos los mismos?
 
-\paragraph{Respuesta} No es posible procesar de manera automática datos porque la representación de los mismos (diminutivos en los nombres, campos compuestos representados como uno solo, etc) depende fuertemente de la base de datos en la que estén almacenados. Por tanto antes de adoptar los datos externos es necesario conocer detalladamente la estructura del almacén del que extraeremos la informacion para seleccionar las correspondencias de los campos de varios almacenes para poder hacer una fusión lo más heterogenea posible.
-
-\clearpage
