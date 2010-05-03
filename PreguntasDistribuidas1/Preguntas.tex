@@ -1,0 +1,121 @@
+% Tipo de documento. En este caso es un artículo, para folios A4, tamaño de la fuente 11pt y con página separada para el título
+\documentclass[a4paper,12pt,titlepage]{article}
+
+% Carga de paquetes necesarios. OrdenesArticle es un paquete personalizado
+\usepackage[spanish]{babel} 
+\RequirePackage[T1]{fontenc}
+\RequirePackage[ansinew]{inputenx} 
+\usepackage[spanish,cap,cont,title,fancy]{OrdenesArticle}
+\usepackage{array}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{pifont}
+\usepackage{listings}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{colortbl}
+\usepackage{makeidx}
+\hypersetup{bookmarksopen,bookmarksopenlevel=3,linktocpage,colorlinks,urlcolor=blue,citecolor=blue,
+						linkcolor=blue,filecolor=blue,pdfnewwindow,
+						pdftitle={Listado de preguntas Funcionalidad 1}, 
+						pdfauthor={Juan Andrada Romero, Juan José Antequera Flores},
+						pdfsubject={Modelos Avanzados de Base de Datos}}
+
+
+% Macro para definir una lista personalizada 
+\newenvironment{milista}%
+{\begin{list}{\textbullet}%
+{\settowidth{\labelwidth}{\textbullet} \setlength{\leftmargin}{\dimexpr\labelsep+\labelwidth+5pt}
+\setlength{\itemsep}{\dimexpr 0.5ex plus 0.25ex minus 0.25ex}
+\setlength{\parsep}{\itemsep}
+\setlength{\partopsep}{\itemsep}
+\addtolength{\topsep}{-7.5pt}
+}}%
+{\end{list}}
+
+
+\begin{document}
+
+% En las páginas de portada e índices, no hay encabezado ni pie de página
+\pagestyle{empty} 
+
+% Se incluye la portada
+\input{Portada.tex}
+\clearpage
+
+\parskip = 10pt
+% Comienza el contenido del documento. Se utilizan números arábigos y el encabezado y pie de página personalizado
+\pagenumbering{arabic}
+\pagestyle{fancy}
+
+\section{Preguntas seleccionadas}
+
+
+\paragraph{Pregunta} En cuanto a la seguridad de las bases de datos distribuidas, se comenta que se debe trabajar en la seguridad de la infraestructura así como en cada uno de los sistemas, y que se necesita una política de seguridad acorde con el proceso paralelo o distribuido, ¿podría indicar cuáles son los principales problemas de seguridad así como las políticas de seguridad aplicadas?
+
+\paragraph{Respuesta} Los principales problemas de la seguridad son la autenticación, la identificación y el refuerzo de los controles de acceso. Por ejemplo, hay aplicaciones en las que las sentencias GRANT y REVOKE de SQL no son suficientes para garantizar el control de acceso y es necesario utilizar otros sistemas más complejos basados en el contenido de la base de datos. Es muy importante que el sistema sea seguro para evitar la revelación de información indebida, modificación de información o denegación del servicio. Por esto, un sistema gestor de bases de datos tiene que gozar de control de acceso multi-nivel, confidencialidad, fiabilidad, integridad y recuperación.
+
+Para el control de acceso se proponen dos enfoques:
+\begin{milista}
+\item \textbf{Datos distribuidos y control centralizado}, que se subdivide a su vez en los enfoques \textit{particionado} y \textit{replicado}. El primero de ellos consiste en un sistema front-end seguro conectado a varios sistemas back-end. Cada sistema back-end opera en un nivel de seguridad local y envía información al servidor front-end. Esto hace que los usuarios puedan sólo acceder a datos del sistema back-end que utilizan, validándose además esos permisos en el servidor front-end. 
+En el segundo caso, los datos se replican en bases de datos seguras, de tal modo que la consulta de un usuario se replica en las diferentes bases de datos.
+
+\item \textbf{Datos distribuidos y control distribuido}: en este enfoque, cada usuario tiene diferentes niveles de acceso, al igual que los datos de las diferentes bases de datos. De este modo, cada nodo que forma la red de la base de datos distribuida tiene diferentes niveles de seguridad, para poder gestionar los diferentes niveles de seguridad de los datos y de los usuarios. 
+
+\end{milista}
+
+Fuente: \cite{preg3}
+
+\clearpage
+
+\paragraph{Pregunta} ¿Cuáles son los cuatro niveles de transparencia que deben conseguirse en una base de datos distribuida?
+
+\paragraph{Respuesta}
+\begin{enumerate}
+	\item \textbf{Transparencia de localización}: las transacciones deben ser independientes de la localización de un elemento de datos particular. De no ser así, las cuestiones de localización complicarían la lógica de la transacción, pues habría que introducir en ella explícitamente las localizaciones dónde se encuentran los datos.
+	\item \textbf{Transparencia de duplicación}: las transacciones son accesibles a la duplicación si pueden procesarse sin saber cuántas veces, o incluso si los datos están duplicados. La transacción puede actuar como si todos los datos estuvieran almacenados sólo una vez en nada más un nodo. Con la transparencia de duplicación, se pueden crear nuevos duplicados, o los duplicados existentes pueden ser eliminados, sin provocar efecto alguno sobre la transacción del usuario o el procesamiento de la consulta.
+	\item \textbf{Transparencia de concurrencia}: aunque múltiples transacciones se realicen sobre la base de datos distribuida al mismo tiempo, los resultados de las transacciones no deberán afectarse. El SGBDD proporciona transparencia de concurrencia si los resultados de todas las transacciones concurrentes son consistentes de manera lógica con los resultados que se habrían obtenido si las transacciones se hubieran ejecutado una por una, en un determinado orden.
+	\item \textbf{Transparencia de fallos}: las transacciones son procesadas de un modo correcto a pesar de fallos que puedan existir en la transacción, en el SGBDD, en la red o en la computadora. Frente a un fallo, las transacciones deberán ser atómicas, esto es, se procesan todas las transacciones o ninguna de ellas. Este es el nivel de transparencia más difícil de alcanzar, pues existen diferentes tipos de fallos y se debe coordinar con la concurrencia de la base de datos.
+	
+\end{enumerate}
+
+Fuente: \cite{preg4}	
+
+
+
+
+\newpage
+
+\section{Preguntas descartadas}
+
+\paragraph{Pregunta} Se comenta que en las bases de datos se utiliza un sistema gestor de base de datos distribuidas (SGBDD). Pero, ¿qué funcionalidades extra añade este tipo de sistema gestor con respecto a un SGBD normal?
+
+\paragraph{Respuesta} \begin{milista}
+\item Servicios de Comunicación Extendidos, para transmitir datos y consultas entre nodos.
+\item Diccionario de Datos Extendido, ya que incluye información del esquema relacional más información de control para ofrecer la
+independencia respecto a la localización, la fragmentación y la réplica.
+\item Procesamiento de Consultas Distribuido, para decidir la estrategia de ejecutar cada consulta sobre la red de la forma más
+eficiente.
+\item Control de Concurrencia y de Transacciones Extendido.
+\item Servicios de Recuperación Extendidos, para recuperarse ante caídas de un nodo local, fallo en la red, etc.
+\item Servicios de Seguridad Extendidos, permitiendo el acceso a los datos según privilegios.
+\end{milista}
+
+Fuente: \cite{preg2}
+
+\paragraph{Pregunta} Se ha hablado de los componentes de las bases de datos distribuidas a nivel software, pero no se ha hablado sobre los componentes hardware. ¿Necesitan las bases de datos distribuidas una configuración hardware específica?
+
+\paragraph{Respuesta} No se necesita un hardware específico, solamente un servidor conectado a la red. Al principio se pensaba que si los servidores eran muy especializados mejorarían la capacidad de la base de datos en conjunto, pero posteriormente se demostró que el enfoque "nada compartido" tenía efectos positivos sobre el rendimiento del sistema.
+
+Fuente: \cite{preg1}
+
+\clearpage\phantomsection
+\addcontentsline{toc}{section}{Referencias}
+
+% Bibliograf\'ia 
+\bibliographystyle{plain}
+\pagestyle{plain} 
+\bibliography{Bibliografia}
+
+
+\end{document}
+
