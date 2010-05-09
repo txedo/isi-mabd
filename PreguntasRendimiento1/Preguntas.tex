@@ -88,23 +88,7 @@ GSI está basado en el uso de claves públicas encriptadas, certificados X.509 y o
 
 Fuentes: \cite{grid}, \cite{gridAccess}, \cite{gridDatabase}
 
-
-\paragraph{Pregunta} Como se indica en el trabajo, un sistema \textit{Grid} permite la virtualización de recursos y el acceso de manera transparente para el usuario. ¿Cuáles son los diferentes niveles de transparencia que deben darse en los servicios proporcionados en un sistema de tipo \textit{Grid}?
-
-\paragraph{Respuesta}
-
-Según la arquitectura OGSA (\textit{Open Grid Services Architecture}), se definen varios niveles de transparencia para los datos:
-
-\begin{milista}
-	\item \textbf{Transparencia de heterogeneidad}: se refiere a que los mecanismos de acceso a los datos deben ser independientes de las distintas implementaciones de los SGBD (DB2, Oracle, etc.) y de la propia estructura de los datos.
-	\item \textbf{Transparencia de localización}: una aplicación debe ser capaz de acceder a los datos, independientemente de donde estén localizados.
-	\item \textbf{Transparencia de nombres}: una aplicación debe ser capaz de acceder a los datos sin conocer el nombre del recurso que los contiene (como la URL, por ejemplo). Ésto debe ser proporcionado por algún tipo de mapeo o de DNS.
-	\item \textbf{Transparencia de distribución}: una aplicación debe poder consultar y manipular datos sin tener que ser consciente de que los datos están distribuidos. Es decir, la aplicación debe poder manejar los datos como si utilizase una base de datos centralizada y única, sin preocuparse de como están distribuidos los datos en los diferentes recursos del sistema \textit{Grid}.
-	\item \textbf{Transparencia de replicación}: la aplicación no tiene que ser consciente de que los datos están replicados en diferentes recursos, sino que las operaciones de consulta y manipulación de los datos se deben tratar como si existiese una única bases de datos. Por tanto, aunque los datos estén distribuidos y replicados, se debe proporcionar la sensación de tener una única base de datos lógica.
-\end{milista}
-
-Fuentes: \cite{gridAccess}, \cite{gridDatabase}
-
+\clearpage
 
 \section{Preguntas descartadas}
 
@@ -126,7 +110,22 @@ De este modo, los sistemas donde se suelen utilizar las bases de datos paralelas
 
 Fuente: \cite{SGBD}, \cite{disciplina}
 
+\clearpage
+\paragraph{Pregunta} Como se indica en el trabajo, un sistema \textit{Grid} permite la virtualización de recursos y el acceso de manera transparente para el usuario. ¿Cuáles son los diferentes niveles de transparencia que deben darse en los servicios proporcionados en un sistema de tipo \textit{Grid}?
 
+\paragraph{Respuesta}
+
+Según la arquitectura OGSA (\textit{Open Grid Services Architecture}), se definen varios niveles de transparencia para los datos:
+
+\begin{milista}
+	\item \textbf{Transparencia de heterogeneidad}: se refiere a que los mecanismos de acceso a los datos deben ser independientes de las distintas implementaciones de los SGBD (DB2, Oracle, etc.) y de la propia estructura de los datos.
+	\item \textbf{Transparencia de localización}: una aplicación debe ser capaz de acceder a los datos, independientemente de donde estén localizados.
+	\item \textbf{Transparencia de nombres}: una aplicación debe ser capaz de acceder a los datos sin conocer el nombre del recurso que los contiene (como la URL, por ejemplo). Ésto debe ser proporcionado por algún tipo de mapeo o de DNS.
+	\item \textbf{Transparencia de distribución}: una aplicación debe poder consultar y manipular datos sin tener que ser consciente de que los datos están distribuidos. Es decir, la aplicación debe poder manejar los datos como si utilizase una base de datos centralizada y única, sin preocuparse de como están distribuidos los datos en los diferentes recursos del sistema \textit{Grid}.
+	\item \textbf{Transparencia de replicación}: la aplicación no tiene que ser consciente de que los datos están replicados en diferentes recursos, sino que las operaciones de consulta y manipulación de los datos se deben tratar como si existiese una única bases de datos. Por tanto, aunque los datos estén distribuidos y replicados, se debe proporcionar la sensación de tener una única base de datos lógica.
+\end{milista}
+
+Fuentes: \cite{gridAccess}, \cite{gridDatabase}
 
 
 \clearpage\phantomsection
