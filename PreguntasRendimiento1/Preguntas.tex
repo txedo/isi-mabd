@@ -1,0 +1,142 @@
+% Tipo de documento. En este caso es un artículo, para folios A4, tamaño de la fuente 11pt y con página separada para el título
+\documentclass[a4paper,12pt,titlepage]{article}
+
+% Carga de paquetes necesarios. OrdenesArticle es un paquete personalizado
+\usepackage[spanish]{babel} 
+\RequirePackage[T1]{fontenc}
+\RequirePackage[ansinew]{inputenx} 
+\usepackage[spanish,cap,cont,title,fancy]{OrdenesArticle}
+\usepackage{array}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{pifont}
+\usepackage{listings}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{colortbl}
+\usepackage{makeidx}
+\hypersetup{bookmarksopen,bookmarksopenlevel=3,linktocpage,colorlinks,urlcolor=blue,citecolor=blue,
+						linkcolor=blue,filecolor=blue,pdfnewwindow,
+						pdftitle={Listado de preguntas Funcionalidad 1}, 
+						pdfauthor={Juan Andrada Romero, Juan José Antequera Flores},
+						pdfsubject={Modelos Avanzados de Base de Datos}}
+
+
+% Macro para definir una lista personalizada 
+\newenvironment{milista}%
+{\begin{list}{\textbullet}%
+{\settowidth{\labelwidth}{\textbullet} \setlength{\leftmargin}{\dimexpr\labelsep+\labelwidth+5pt}
+\setlength{\itemsep}{\dimexpr 0.5ex plus 0.25ex minus 0.25ex}
+\setlength{\parsep}{\itemsep}
+\setlength{\partopsep}{\itemsep}
+\addtolength{\topsep}{-7.5pt}
+}}%
+{\end{list}}
+
+
+\begin{document}
+
+% En las páginas de portada e índices, no hay encabezado ni pie de página
+\pagestyle{empty} 
+
+% Se incluye la portada
+\input{Portada.tex}
+\clearpage
+
+\parskip = 10pt
+% Comienza el contenido del documento. Se utilizan números arábigos y el encabezado y pie de página personalizado
+\pagenumbering{arabic}
+\pagestyle{fancy}
+
+\section{Preguntas seleccionadas}
+
+
+\paragraph{Pregunta} En el trabajo se habla acerca de sistemas paralelos y se comenta que existen arquitecturas paralelas de \textit{disco compartido} y \textit{sin compartimiento}. Pero, ¿cuáles son los cuatro tipos de arquitecturas utilizadas en sistemas paralelos?.
+
+\paragraph{Respuesta}
+
+\begin{milista}
+	\item \textbf{Arquitectura de memoria compartida}: los procesadores y discos tienen un acceso común a memoria, normalmente a través de un bus o
+de una red de interconexión. Esta arquitectura es muy eficiente en la comunicación entre procesadores pero no se pueden tener más de 32 o 64
+procesadores porque el bus o la red de interconexión se convertiría en un cuello de botella.
+En las arquitecturas de memoria compartida, cada procesador suele tener una memoria caché muy grande para evitar acceder muy a menudo a la memoria compartida, aunque se debe mantener la coherencia de los datos en todas las cachés.
+
+	\item \textbf{Arquitectura de disco compartido} Todos los procesadores podrán acceder a todos los discos y cada procesador tiene memoria privada. De este modo, el bus deja de ser un cuello de botella y existe la tolerancia a fallos, pues se duplican los datos en cada disco y si un procesador falla, otros procesadores podrán ejecutar las sentencias de acceso a los datos. 
+
+	\item \textbf{Arquitectura sin compartimiento} Cada nodo de la máquina consta de procesador, memoria y uno o más discos. Un nodo se
+comunica con otro a través de una red de interconexión de alta velocidad, por la que viajan las peticiones a los datos, los accesos a los discos remotos y los resultados obtenidos. De este modo, cada nodo actúa como un servidor de datos, de manera similar a cómo sucede en las bases de datos distribuidas. Siguiendo esta arquitectura, la escalabilidad es muy alta, pero tiene como inconveniente el coste, ya que el software es más complejo para evitar bloqueos y mantener la coherencia en cada nodo. 
+
+	\item \textbf{Arquitectura jerárquica} Combina las características de los modelos anteriores. El sistema está formado por
+una arquitectura sin compartimiento donde cada nodo es en realidad un sistema de disco compartido o un sistema de memoria compartida. 
+
+\end{milista}
+
+Fuentes: \cite{SGBD}, \cite{arquitecturas}
+
+
+\clearpage
+
+
+\paragraph{Pregunta} En el trabajo se comenta que una base de datos \textit{Grid} debe tener como requisito la seguridad. Pero, ¿cuáles son los mecanismos que se llevan a cabo para garantizar la seguridad en este tipo de bases de datos?
+
+\paragraph{Respuesta}
+
+Para la seguridad en bases de datos Grid, hay que tener en cuenta el control de acceso, autenticación y gestión de cuentas de usuarios. Esto se conoce como la \textit{Triple A (AAA)}, por sus siglas en inglés: Access Control, Authentication y Accounting.
+
+Para poder acceder a los datos del sistema Grid, se debe comprobar la identidad del usuario (autenticación), sus permisos y privilegios de lectura/escritura (control de acceso) y registrar todas las operaciones que dicho usuario realice (tarea de \textit{accounting}). Para ello, hoy en día se utiliza GSI (\textit{Grid Security Infraestructure}), que permite la encriptación, confidencialidad e integridad de los datos, protección contra ataques de denegación de servicio y detección de paquetes fuera de orden.
+
+GSI está basado en el uso de claves públicas encriptadas, certificados X.509 y otros mecanismos de seguridad como SSL. Para realizar la autenticación y otros mecanismos de seguridad, GSI se apoya en algunos \textit{middleware}, como el \textit{middleware} \textbf{Spitfire}, que permite el mapeo de certificados de usuarios a los distintos roles permitidos en la base de datos. También utiliza otros mecanismos, como el Gestor de Recursos de Almacenamiento (SRB - \textit{Storage Resource Broker}), que permite la autenticación de los clientes ante los servidores.
+
+Fuentes: \cite{grid}, \cite{gridAccess}, \cite{gridDatabase}
+
+
+\paragraph{Pregunta} Como se indica en el trabajo, un sistema \textit{Grid} permite la virtualización de recursos y el acceso de manera transparente para el usuario. ¿Cuáles son los diferentes niveles de transparencia que deben darse en los servicios proporcionados en un sistema de tipo \textit{Grid}?
+
+\paragraph{Respuesta}
+
+Según la arquitectura OGSA (\textit{Open Grid Services Architecture}), se definen varios niveles de transparencia para los datos:
+
+\begin{milista}
+	\item \textbf{Transparencia de heterogeneidad}: se refiere a que los mecanismos de acceso a los datos deben ser independientes de las distintas implementaciones de los SGBD (DB2, Oracle, etc.) y de la propia estructura de los datos.
+	\item \textbf{Transparencia de localización}: una aplicación debe ser capaz de acceder a los datos, independientemente de donde estén localizados.
+	\item \textbf{Transparencia de nombres}: una aplicación debe ser capaz de acceder a los datos sin conocer el nombre del recurso que los contiene (como la URL, por ejemplo). Ésto debe ser proporcionado por algún tipo de mapeo o de DNS.
+	\item \textbf{Transparencia de distribución}: una aplicación debe poder consultar y manipular datos sin tener que ser consciente de que los datos están distribuidos. Es decir, la aplicación debe poder manejar los datos como si utilizase una base de datos centralizada y única, sin preocuparse de como están distribuidos los datos en los diferentes recursos del sistema \textit{Grid}.
+	\item \textbf{Transparencia de replicación}: la aplicación no tiene que ser consciente de que los datos están replicados en diferentes recursos, sino que las operaciones de consulta y manipulación de los datos se deben tratar como si existiese una única bases de datos. Por tanto, aunque los datos estén distribuidos y replicados, se debe proporcionar la sensación de tener una única base de datos lógica.
+\end{milista}
+
+Fuentes: \cite{gridAccess}, \cite{gridDatabase}
+
+
+\section{Preguntas descartadas}
+
+\paragraph{Pregunta} ¿Qué SGBD comerciales implementan arquitecturas paralelas y en qué tipos de aplicaciones se utilizan las bases de datos paralelas?
+
+\paragraph{Respuesta}
+
+Las bases de datos paralelas se utilizan en SGBD comerciales como Oracle, Informix y Sybase. 
+
+
+En cuanto a las aplicaciones donde se utilizan este tipo de bases de datos, éstas se suelen utilizar en sistemas de \textbf{muy} altas prestaciones, pues aunque sea posible comprar sistemas cada día más grandes y rápidos, a veces no es económico sustituir el hardware cada pocos años (o incluso meses), periodo en el que se suele duplicar la información de una organización. Por ello, no es muy útil utilizar estas bases de datos en aplicaciones que no sean muy complejas ni en empresas que no necesiten una carga de datos y velocidad muy elevadas. 
+
+De este modo, los sistemas donde se suelen utilizar las bases de datos paralelas son aquellos sistemas que trabajan con enormes cantidades de datos y se necesita una velocidad de recuperación muy elevada. Se pueden destacar estos dos tipos de sistemas: 
+
+\begin{milista}
+	\item \textbf{Sistemas de procesamiento analítico en línea}: son sistemas donde se trabajan con cargas de datos muy elevadas y donde hay que realizar consultas y cálculos a una gran velocidad, para disminuir el tiempo de espera del usuario. Por ello, las consultas y los cálculos se suelen paralelizar.
+	\item \textbf{Sistemas de minería de datos}; al igual que en el caso anterior, se trabajan con cantidades de datos muy elevadas, siendo necesario paralelizar las consultas para intentar descubrir reglas o patrones en los datos e ir realizando en paralelo diferentes árboles de decisión. 
+\end{milista}
+
+Fuente: \cite{SGBD}, \cite{disciplina}
+
+
+
+
+\clearpage\phantomsection
+\addcontentsline{toc}{section}{Referencias}
+
+% Bibliograf\'ia 
+\bibliographystyle{plain}
+\pagestyle{plain} 
+\bibliography{Bibliografia}
+
+
+\end{document}
+
