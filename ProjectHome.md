@@ -1,0 +1,1 @@
+Repositorio para los trabajos de teoría de Modelos Avanzados de Base de Datos de la Escuela Superior de Informática de Ciudad Real (UCLM)
